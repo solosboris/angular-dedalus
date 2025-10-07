@@ -1,0 +1,14 @@
+<h2>Angular dedalus denomination REST API Example</h2>
+
+<form (ngSubmit)="showDifference()">
+  <input [(ngModel)]="previousAmount" name="previous" type="string" placeholder="Previous amount"/>
+  <input [(ngModel)]="currentAmount" name="current" type="string" placeholder="Current amount"/>
+  <button type="submit">{{ 'Show difference' }}</button>
+  <button type="button" (click)="resetForm()">reset</button>
+</form>
+
+<ul>
+  <li *ngFor="let denom of denominationDiff.items">
+    {{ denom.amount }} {{ denom.moneyItem.cent }} {{ denom.moneyItem.type }}
+  </li>
+</ul>

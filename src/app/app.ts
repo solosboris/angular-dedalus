@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { ApiAmountService } from './services/amount.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -8,18 +8,22 @@ import { Denomination } from "./models/denomination.model";
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  imports: [ CommonModule, FormsModule ],
+  templateUrl: './app.html',
+  styleUrl: './app.css'
 })
-export class AppComponent {
-  title = 'angular-dedalus';
+export class App {
+  protected readonly title = signal('angular-dedalus');
   amount: string | null = null;
   previousAmount: string | null = null;
   currentAmount: string | null = null;
   denomination: Denomination;
   denominationDiff: Denomination;
 
-  constructor(private amountService: ApiAmountService) { } // Inject ApiAmountService
+ constructor(private amountService: ApiAmountService) {
+    this.denomination = new Denomination();
+    this.denominationDiff = new Denomination();
+ } // Inject ApiAmountService
 
   resetForm() {
     this.amount = null;
